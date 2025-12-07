@@ -1,0 +1,87 @@
+{
+  "contractors": {
+    "roofing": {
+      "count": 12,
+      "businesses": [
+        {"name": "Summit Roofing Experts", "rating": 4.8, "verified": true, "reviews": 87},
+        {"name": "Superior Roof Systems", "rating": 4.7, "verified": true, "reviews": 64},
+        {"name": "Elite Roofing Solutions", "rating": 4.9, "verified": true, "reviews": 112},
+        {"name": "Guardian Roof Company", "rating": 4.5, "verified": false, "reviews": 43},
+        {"name": "Precision Roofing Co.", "rating": 4.6, "verified": true, "reviews": 56},
+        {"name": "Apex Roofing Services", "rating": 4.8, "verified": true, "reviews": 78}
+      ]
+    },
+    "plumbing": {
+      "count": 8,
+      "businesses": [
+        {"name": "Prestige Plumbing Services", "rating": 4.6, "verified": true, "reviews": 59},
+        {"name": "Rapid Response Plumbers", "rating": 4.9, "verified": true, "reviews": 124},
+        {"name": "Quality Plumbing Pros", "rating": 4.7, "verified": true, "reviews": 82},
+        {"name": "Reliable Pipe Masters", "rating": 4.5, "verified": false, "reviews": 37}
+      ]
+    },
+    "electrical": {
+      "count": 15,
+      "businesses": [
+        {"name": "Power Circuit Electricians", "rating": 4.8, "verified": true, "reviews": 93},
+        {"name": "Elite Electrical Services", "rating": 4.9, "verified": true, "reviews": 148},
+        {"name": "Bright Solutions Electric", "rating": 4.7, "verified": true, "reviews": 76},
+        {"name": "Voltage Masters", "rating": 4.6, "verified": true, "reviews": 64},
+        {"name": "Circuit City Electricians", "rating": 4.8, "verified": true, "reviews": 89}
+      ]
+    },
+    "hvac": {
+      "count": 10,
+      "businesses": [
+        {"name": "Comfort Zone HVAC", "rating": 4.9, "verified": true, "reviews": 132},
+        {"name": "Climate Control Experts", "rating": 4.8, "verified": true, "reviews": 94},
+        {"name": "Air Quality Solutions", "rating": 4.7, "verified": true, "reviews": 67},
+        {"name": "Cool Breeze Systems", "rating": 4.6, "verified": false, "reviews": 53}
+      ]
+    },
+    "windows": {
+      "count": 6,
+      "businesses": [
+        {"name": "Crystal Clear Windows", "rating": 4.8, "verified": true, "reviews": 78},
+        {"name": "Premier Glass & Window", "rating": 4.7, "verified": true, "reviews": 63},
+        {"name": "Vista Window Specialists", "rating": 4.9, "verified": true, "reviews": 94}
+      ]
+    },
+    "siding": {
+      "count": 5,
+      "businesses": [
+        {"name": "Exterior Excellence Siding", "rating": 4.8, "verified": true, "reviews": 71},
+        {"name": "Premium Siding Solutions", "rating": 4.7, "verified": true, "reviews": 58},
+        {"name": "Facade Masters", "rating": 4.6, "verified": true, "reviews": 49}
+      ]
+    },
+    "gutters": {
+      "count": 7,
+      "businesses": [
+        {"name": "Flow Right Gutters", "rating": 4.8, "verified": true, "reviews": 67},
+        {"name": "Gutter Guard Experts", "rating": 4.7, "verified": true, "reviews": 52},
+        {"name": "Rainway Solutions", "rating": 4.9, "verified": true, "reviews": 83}
+      ]
+    },
+    "general_contractor": {
+      "count": 20,
+      "businesses": [
+        {"name": "Master Building Group", "rating": 4.9, "verified": true, "reviews": 176},
+        {"name": "Total Home Transformations", "rating": 4.8, "verified": true, "reviews": 124},
+        {"name": "Premier Construction Services", "rating": 4.7, "verified": true, "reviews": 92},
+        {"name": "Elite Home Builders", "rating": 4.8, "verified": true, "reviews": 108},
+        {"name": "Cornerstone Construction", "rating": 4.6, "verified": false, "reviews": 73}
+      ]
+    }
+  },
+  "cities": {
+    "10001": {"name": "New York, NY", "active": true},
+    "94016": {"name": "San Francisco, CA", "active": true},
+    "60601": {"name": "Chicago, IL", "active": true},
+    "90210": {"name": "Beverly Hills, CA", "active": true},
+    "33101": {"name": "Miami, FL", "active": true},
+    "75201": {"name": "Dallas, TX", "active": true},
+    "02108": {"name": "Boston, MA", "active": true},
+    "98101": {"name": "Seattle, WA", "active": true}
+  }
+}

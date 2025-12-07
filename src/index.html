@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Horizons - Find Trusted Local Pros</title>
+  <meta name="description" content="Find trusted pros for any home project" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles/main.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#/home">
+        <span class="ph-logo">PH</span>
+        <span class="ph-wordmark">Pro <strong>Horizons</strong></span>
+      </a>
+      <nav class="top-nav">
+        <a href="#/categories">Categories</a>
+        <a href="#/cities">Cities</a>
+        <a href="#/contractors">Contractors</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy card">
+        <div class="pad">
+          <div class="kicker">NEW</div>
+          <h1>Find trusted pros for any home project</h1>
+          <p class="muted">Find the best contractor for your needs, with the best reviews and experience.</p>
+          <!-- Search input drives the category previews -->
+          <form id="home-form" class="search-row" autocomplete="off">
+            <div class="search-input">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 21l-4.35-4.35" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="10" cy="10" r="7" stroke="#64748b" stroke-width="2" fill="none"/>
+              </svg>
+              <input id="home-zip" placeholder="Enter ZIP (e.g., 10001)" inputmode="numeric" pattern="\\d{5}" />
+            </div>
+            <button type="submit">Search</button>
+          </form>
+          <ul class="hero-bullets">
+            <li>Verified badges</li>
+            <li>Transparent pricing</li>
+            <li>24/7 availability filters</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="hero-art card">
+        <div class="pad hero-artbox">Hero image / illustration</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Popular categories -->
+  <main class="wrap">
+    <section>
+      <h2 class="section-title">Popular Categories</h2>
+      <div id="cat-grid" class="cat-grid">
+        <!-- Category cards will be populated by JavaScript -->
+      </div>
+      <div id="cat-note" class="muted" style="margin-top:8px"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap foot-row">
+      <div>© <span id="year"></span> ProHorizons</div>
+      <div class="muted">
+        Worker: <code id="worker-url"></code> ·
+        <a id="health-link" target="_blank" rel="noreferrer">health</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/app.js" type="module"></script>
+</body>
+</html>
