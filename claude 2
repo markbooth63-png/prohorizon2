@@ -1,0 +1,157 @@
+ProHorizons Website Development Plan
+🛠️ Framework Selection for Multi-layered Website
+For a multi-layered website with complex navigation and content structure, Next.js would be the optimal choice:
+
+Benefits for your project:
+Built-in routing system perfect for complex page hierarchies
+Server components reduce client-side JavaScript
+Excellent SEO capabilities for better discoverability
+API routes for handling data fetching
+Built on React, so compatible with your existing knowledge
+Great developer experience and extensive documentation
+📂 GitHub Repository Analysis
+I've reviewed your repositories:
+
+prohorizon1
+Contains more files with what appears to be earlier development work.
+
+prohorizon2
+A newer repository with fewer files, possibly a fresh start.
+
+Recommendation: Let's build on prohorizon2 since it's cleaner and we can incorporate the best elements from prohorizon1 while implementing the new design approach.
+
+🏗️ Implementation Strategy
+1. Project Structure Setup
+prohorizon2/
+├── app/                      # Next.js app directory
+│   ├── page.js               # Home page with split layout
+│   ├── contractors/          # Contractors section
+│   │   ├── page.js           # Contractors listing
+│   │   └── [id]/page.js      # Individual contractor page
+│   ├── professionals/        # Professionals section
+│   │   ├── page.js           # Professionals listing
+│   │   └── [id]/page.js      # Individual professional page
+│   └── layout.js             # Root layout with header/footer
+├── components/               # Reusable components
+├── lib/                      # Utilities and data handling
+├── public/                   # Static assets
+└── styles/                   # Global styles
+2. Split Layout Implementation
+For the home page with Contractors on left, Professionals on right:
+
+jsx
+ 
+// app/page.js
+export default function Home() {
+  return (
+    <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto px-4 py-8">
+      <section className="contractors-section">
+        <div className="section-header">
+          <h2 className="text-2xl font-bold">Contractors</h2>
+          <p className="text-slate-600">Find service professionals for your home projects</p>
+        </div>
+        
+        <div className="grid gap-4 mt-6">
+          {/* Contractor listings will go here */}
+          <ContractorHighlights />
+        </div>
+        
+        <div className="mt-6">
+          <Link href="/contractors" className="brand-blue-bg text-white px-6 py-2 rounded-xl inline-block hover-blue">
+            View all contractors
+          </Link>
+        </div>
+      </section>
+      
+      <section className="professionals-section">
+        <div className="section-header">
+          <h2 className="text-2xl font-bold">Professionals</h2>
+          <p className="text-slate-600">Connect with specialized experts in your area</p>
+        </div>
+        
+        <div className="grid gap-4 mt-6">
+          {/* Professional listings will go here */}
+          <ProfessionalHighlights />
+        </div>
+        
+        <div className="mt-6">
+          <Link href="/professionals" className="brand-yellow-bg text-slate-900 px-6 py-2 rounded-xl inline-block hover-yellow">
+            View all professionals
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+3. Core Components
+We'll create reusable components that maintain your brand colors and design approach:
+
+Header Component - Navigation and search
+Card Components - Listings for contractors and professionals
+Category Grid - Filterable grid of service categories
+Search Component - Unified search with filters
+4. Data Architecture
+js
+ 
+// lib/data.js - Example data structure
+export const categories = [
+  { id: 'roofing', name: 'Roofing', icon: '🏠' },
+  { id: 'plumbing', name: 'Plumbing', icon: '🔧' },
+  // etc.
+];
+
+export const contractors = [
+  { 
+    id: 'c1',
+    type: 'contractor',
+    name: 'Summit Roofing Experts',
+    category: 'roofing',
+    rating: 4.8,
+    reviews: 87,
+    // etc.
+  },
+  // etc.
+];
+
+export const professionals = [
+  {
+    id: 'p1',
+    type: 'professional',
+    name: 'John Smith Architects',
+    specialty: 'architectural-design',
+    rating: 4.9,
+    reviews: 124,
+    // etc.
+  },
+  // etc.
+];
+
+🚀 Implementation Steps
+Phase 1: Foundation
+Set up Next.js with TailwindCSS
+Implement global styles with your brand colors
+Create basic layout with header and footer
+Develop the split home page layout
+Phase 2: Component Library
+Build card components for listings
+Implement search and filtering functionality
+Create category and city browsing components
+Develop detailed profile pages
+Phase 3: Data and Functionality
+Set up data fetching architecture
+Implement routing and navigation
+Add search functionality
+Integrate Cloudflare and Google APIs
+🧠 Getting Started
+Let's begin by setting up a fresh Next.js project within your prohorizon2 repository:
+
+Clone your repository
+Initialize Next.js with TailwindCSS
+Create the basic page structure
+Implement the core layout components
+Would you like me to provide specific commands and code examples to get started with this implementation?
+
+
+
+
