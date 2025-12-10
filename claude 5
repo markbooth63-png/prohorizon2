@@ -1,0 +1,193 @@
+Complete Home Page File (app/page.tsx)
+Here's the full file content for your home page to copy and paste directly:
+
+tsx
+ 
+"use client";
+import { useState } from 'react';
+import Link from 'next/link';
+import { contractors } from './data/contractors';
+import { professionals } from './data/professionals';
+import ContractorCard from './components/ContractorCard';
+import ProfessionalCard from './components/ProfessionalCard';
+
+export default function Home() {
+  const [zipCode, setZipCode] = useState('');
+  
+  // Show top 3 contractors and professionals
+  const topContractors = contractors.slice(0, 3);
+  const topProfessionals = professionals.slice(0, 3);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log('Form submitted with ZIP:', zipCode);
+    
+    if (zipCode.length !== 5 || !/^\d+$/.test(zipCode)) {
+      alert('Please enter a valid 5-digit ZIP code');
+      return;
+    }
+    
+    console.log('Navigating to results page');
+    window.location.href = `/results?zip=${zipCode}`;
+  };
+
+  return (
+    <main className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold text-center mb-8">
+          <span className="text-[#127C87]">Pro</span>
+          <span className="text-[#FFC629]">Horizons</span>
+        </h1>
+        
+        <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-sm border mb-8">
+          <h2 className="text-2xl font-bold mb-2 text-center">Find Trusted Local Pros</h2>
+          <p className="text-gray-600 mb-4 text-center">Enter your ZIP code to find top-rated professionals in your area</p>
+          
+          <form 
+            onSubmit={handleSubmit}
+            className="flex flex-col sm:flex-row gap-3 mt-4"
+          >
+            <div className="relative flex-1">
+              <input 
+                type="text" 
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                placeholder="Enter ZIP code (e.g., 10001)" 
+                className="w-full pl-10 pr-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#127C87]/30"
+                pattern="[0-9]{5}"
+                maxLength={5}
+              />
+              <svg 
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                width="20" height="20" viewBox="0 0 24 24" fill="none"
+              >
+                <path 
+                  d="M12 22s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <circle cx="12" cy="11" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <button 
+              type="submit"
+              className="py-3 px-6 bg-[#127C87] text-white rounded-xl hover:bg-[#0e636c]"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Column - Contractors */}
+          <section>
+            <div className="bg-white p-6 rounded-xl shadow-sm border mb-6">
+              <h2 className="text-2xl font-bold mb-2">Contractors</h2>
+              <p className="text-gray-600 mb-4">Find service professionals for your home projects</p>
+              
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search contractors..."
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[#127C87]/30"
+                />
+                <svg 
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                  width="20" height="20" viewBox="0 0 24 24" fill="none"
+                >
+                  <path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" 
+                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              {topContractors.map(contractor => (
+                <ContractorCard key={contractor.id} contractor={contractor} />
+              ))}
+            </div>
+            
+            <div className="mt-6 text-center">
+              <Link href="/contractors" className="inline-block bg-[#127C87] text-white px-6 py-2 rounded-lg hover:bg-[#0e636c]">
+                View All Contractors
+              </Link>
+            </div>
+          </section>
+          
+          {/* Right Column - Professionals */}
+          <section>
+            <div className="bg-white p-6 rounded-xl shadow-sm border mb-6">
+              <h2 className="text-2xl font-bold mb-2">Professionals</h2>
+              <p className="text-gray-600 mb-4">Connect with specialized experts in your area</p>
+              
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search professionals..."
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[#FFC629]/30"
+                />
+                <svg 
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                  width="20" height="20" viewBox="0 0 24 24" fill="none"
+                >
+                  <path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" 
+                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              {topProfessionals.map(professional => (
+                <ProfessionalCard key={professional.id} professional={professional} />
+              ))}
+            </div>
+            
+            <div className="mt-6 text-center">
+              <Link href="/professionals" className="inline-block bg-[#FFC629] text-black px-6 py-2 rounded-lg hover:bg-[#e6b325]">
+                View All Professionals
+              </Link>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+Complete Results Page File (app/results/page.tsx)
+And here's the complete file for the results page:
+
+tsx
+ 
+"use client";
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+
+export default function ResultsPage() {
+  const searchParams = useSearchParams();
+  const zip = searchParams.get('zip');
+  
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">
+        Search Results for ZIP: {zip || 'No ZIP provided'}
+      </h1>
+      
+      <div className="bg-white p-6 rounded-xl shadow-sm border mb-6">
+        <p>We found the following results for ZIP code {zip}:</p>
+        <p className="mt-4 text-gray-600">
+          This is a test page to confirm that ZIP code search routing is working.
+        </p>
+      </div>
+      
+      <Link href="/" className="text-[#127C87] hover:underline">
+        Return to homepage
+      </Link>
+    </div>
+  );
+}
+
+Copy and paste these complete files exactly as shown to ensure there are no errors. After saving both files, restart your development server if needed and test the ZIP code search functionality.
