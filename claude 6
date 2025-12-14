@@ -1,0 +1,381 @@
+
+🚀 Complete Copy-Paste Code for ProHorizon Project
+Here are the complete files with no quotes - just direct copy-paste code for each file:
+
+📄 components/Results.tsx
+tsx
+ 
+import React from 'react';
+
+interface Business {
+  name: string;
+  rating: number;
+  verified: boolean;
+  reviews: number;
+}
+
+interface ResultsProps {
+  businesses: Business[];
+  categoryName?: string;
+}
+
+export function Results({ businesses, categoryName }: ResultsProps) {
+  if (!businesses || businesses.length === 0) {
+    return <p>No contractors found. Please try a different search.</p>;
+  }
+
+  return (
+    <div className="results-container">
+      <h2>{categoryName ? `${categoryName} Contractors` : 'Contractors'}</h2>
+      <p>{businesses.length} contractors found</p>
+      
+      <div className="results-grid">
+        {businesses.map((business, index) => (
+          <div key={index} className="business-card">
+            <h3>{business.name}</h3>
+            <div className="business-details">
+              <div className="rating">
+                <span className="stars">{"★".repeat(Math.floor(business.rating))}</span>
+                <span className="rating-number">{business.rating}</span>
+                <span className="reviews">({business.reviews} reviews)</span>
+              </div>
+              {business.verified && <span className="verified-badge">✓ Verified</span>}
+            </div>
+            <button className="contact-button">Contact</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+📄 components/Search.tsx
+tsx
+ 
+'use client';
+
+import React, { useState } from 'react';
+import { Results } from './Results';
+import data from '@/data.json';
+
+interface SearchProps {
+  categories: string[];
+  locations: { [zipcode: string]: { name: string; active: boolean } };
+}
+
+export function Search({ categories, locations }: SearchProps) {
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [isSearched, setIsSearched] = useState(false);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (selectedCategory && data.contractors[selectedCategory]) {
+      setSearchResults(data.contractors[selectedCategory].businesses || []);
+      setIsSearched(true);
+    } else {
+      setSearchResults([]);
+      setIsSearched(true);
+    }
+  };
+
+  const formatCategory = (category: string) => {
+    return category.replace(/_/g, ' ')
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  return (
+    <>
+      <div className="search-container">
+        <h2>Find Trusted Contractors</h2>
+        <form onSubmit={handleSearch}>
+          <div className="search-fields">
+            <div className="field">
+              <label htmlFor="category">Service Type</label>
+              <select 
+                id="category" 
+                value={selectedCategory} 
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                required
+              >
+                <option value="">Select a service</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {formatCategory(category)}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="field">
+              <label htmlFor="location">Location</label>
+              <select 
+                id="location" 
+                value={selectedLocation} 
+                onChange={(e) => setSelectedLocation(e.target.value)}
+                required
+              >
+                <option value="">Select your city</option>
+                {Object.entries(locations).map(([zipcode, location]) => (
+                  location.active && (
+                    <option key={zipcode} value={zipcode}>
+                      {location.name}
+                    </option>
+                  )
+                ))}
+              </select>
+            </div>
+            
+            <button type="submit" className="search-button">Find Contractors</button>
+          </div>
+        </form>
+      </div>
+      
+      {isSearched && (
+        <Results 
+          businesses={searchResults}
+          categoryName={selectedCategory ? formatCategory(selectedCategory) : ''}
+        />
+      )}
+    </>
+  );
+}
+
+📄 app/page.tsx
+tsx
+ 
+import { Search } from '@/components/Search';
+import data from '@/data.json';
+
+export default function Home() {
+  const categories = Object.keys(data.contractors);
+  
+  return (
+    <>
+      <Search 
+        categories={categories} 
+        locations={data.cities} 
+      />
+    </>
+  );
+}
+
+📄 app/layout.tsx (if you need to create this file)
+tsx
+ 
+import '../styles/globals.css';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata = {
+  title: 'ProHorizon - Find Trusted Contractors',
+  description: 'Connect with verified contractors in your area',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <div className="container">
+          <header>
+            <h1>ProHorizon Contractor Finder</h1>
+          </header>
+          
+          <main>{children}</main>
+          
+          <footer>
+            <p>© {new Date().getFullYear()} ProHorizon. All rights reserved.</p>
+          </footer>
+        </div>
+      </body>
+    </html>
+  );
+}
+
+📄 styles/globals.css (if you need to update your CSS)
+css
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+h1 {
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+/* Search Component */
+.search-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.search-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.field {
+  flex: 1;
+  min-width: 200px;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Results Component */
+.results-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.business-card {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s;
+}
+
+.business-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.business-details {
+  margin: 1rem 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.stars {
+  color: #f59e0b;
+  margin-right: 0.5rem;
+}
+
+.reviews {
+  color: #6b7280;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.verified-badge {
+  display: inline-block;
+  background-color: #10b981;
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.contact-button {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.contact-button:hover {
+  background-color: #1d4ed8;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+📋 Steps to Update Your Project
+Open VS Code to your project
+Open each file (create it if it doesn't exist)
+Replace the entire file contents with the code above
+Save each file
+Run your development server:
+bash
+ 
+npm run dev
+
+All code is ready to copy and paste - no need to hunt for specific sections!
